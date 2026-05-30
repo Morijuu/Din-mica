@@ -249,7 +249,7 @@ Transform:
   m_GameObject: {fileID: 284031304}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.8500004, z: 2.77}
+  m_LocalPosition: {x: 0, y: 4.8500004, z: -5.07}
   m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -869,13 +869,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da77cf73523b2d24794a7285959ccd39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VelocidadMov: 150
-  VelocidadRot: 750
+  VelocidadMov: 1000
+  VelocidadRot: 5000
   MaxVelocidad: 5
   MaxVelocidadRot: 4
   hinge: {fileID: 1621652747}
-  objetivoHinge: -45
-  velocidadInterpolacion: 3
+  anguloListo: -14
+  anguloLanzado: 30
+  fuerzaCarga: 3000
+  fuerzaLanzamiento: 8000
+  amortiguacion: 80
+  umbralAngulo: 5
+  tiempoMaxLanzando: 2
+  tiempoEstable: 0.3
 --- !u!4 &522537706
 Transform:
   m_ObjectHideFlags: 0
@@ -1251,7 +1257,7 @@ HingeJoint:
     targetVelocity: 0
     force: 0
     freeSpin: 0
-  m_UseLimits: 1
+  m_UseLimits: 0
   m_ExtendedLimits: 0
   m_UseAcceleration: 0
   m_Limits:
@@ -1373,7 +1379,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1621652746}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c8ed03201206b446aee720050c7a254, type: 3}
   m_Name: 
