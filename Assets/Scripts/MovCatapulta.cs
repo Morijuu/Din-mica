@@ -44,6 +44,7 @@ public class MovCatapulta : MonoBehaviour
             if (timer >= tiempoRecarga)
             {
                 Instantiate(prefabBola, spawnBola.position, spawnBola.rotation);
+                BallManager.Instance.OnBallThrown();
                 timer  = 0f;
                 estado = Estado.Lista;
             }
@@ -65,6 +66,28 @@ public class MovCatapulta : MonoBehaviour
 
         if (estado == Estado.EnReposo)
         {
+            // Verificar si hay bolas totales
+            BallManager ballManager = FindFirstObjectByType<BallManager>();
+            if (ballManager != null && ballManager.GetBallsRemaining() <= 0)
+            {
+                ballManager.CheckGameOver();
+                return;
+            }
+
+            // Si las bolas de esta estructura están agotadas, resetea la estructura ANTES de cargar
+            TowerSpawner spawner = FindFirstObjectByType<TowerSpawner>();
+            if (spawner != null)
+            {
+                int used = spawner.GetBallsUsedThisStructure();
+                int max = spawner.GetMaxBallsPerStructure();
+
+                if (used >= max)
+                {
+                    Debug.Log($"Bolas agotadas ({used}/{max}), reseteando estructura...");
+                    spawner.ResetForNextShot();
+                }
+            }
+
             hinge.useSpring = true;
             hinge.useLimits = true;
             timer  = 0f;
