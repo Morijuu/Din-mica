@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     private float comboResetTimer = 0f;
     private float comboResetDelay = 3f;
 
+    public GameObject canvasPause;
+
     private void Awake()
     {
         if (Instance == null)
@@ -23,9 +25,16 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        canvasPause.SetActive(false);
+        Time.timeScale = 1f;
         UpdateUI();
     }
 
+    void Pausa()
+    {
+        canvasPause.SetActive(true);
+        Time.timeScale = 0f;
+    }
     private void Update()
     {
         if (blocksDestroyedThisShot > 0)
@@ -35,6 +44,11 @@ public class GameManager : MonoBehaviour
             {
                 ResetCombo();
             }
+        }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Pausa();
         }
     }
 
